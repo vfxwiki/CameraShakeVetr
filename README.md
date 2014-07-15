@@ -1,8 +1,21 @@
 CameraShakeVetr
 ===============
 
-Camera Shake Tool for nuke
+Another Camera Shake Tool for Nuke
+Features:
 
+- use either vector Blur or 2d transform motion blur
+- combine vectors from an input with camera shake vectors for motion blur
+- presets
+- tiling
+- pre-transform paramaters (i.e. to scale the image) 
+- combining two noise patterns together i.e. a small vibration shake with a hand-held shake.
+- being able to view the output curves with time offsets to place the big 'bumps' at the right moment in time
+- seperate amplitude and frequency for Transform, scale and rotation
+- #to do: automatic scale feature for pre-transform paramaters
+- #to do: add the option of different noise generators
+- #to do: export/load json presets
+- 
 LICENCE
 =======
 By downloading a file from this repository you agree to the general license terms below. Copyright (c) 2010 till present All rights reserved.
