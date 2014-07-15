@@ -1,7 +1,7 @@
 CameraShakeVetr
 ===============
 
-Another Camera Shake Tool for Nuke
+Another 2D Camera Shake Tool for Nuke
 Features:
 
 - use either vector Blur or 2d transform motion blur
