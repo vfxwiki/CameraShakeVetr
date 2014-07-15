@@ -12,10 +12,10 @@ Features:
 - combining two noise patterns together i.e. a small vibration shake with a hand-held shake.
 - being able to view the output curves with time offsets to place the big 'bumps' at the right moment in time
 - seperate amplitude and frequency for Transform, scale and rotation
-- #to do: automatic scale feature for pre-transform paramaters
-- #to do: add the option of different noise generators
-- #to do: export/load json presets
-- 
+- todo: automatic scale feature for pre-transform paramaters
+- todo: add the option of different noise generators
+- todo: export/load json presets- 
+
 LICENCE
 =======
 By downloading a file from this repository you agree to the general license terms below. Copyright (c) 2010 till present All rights reserved.
