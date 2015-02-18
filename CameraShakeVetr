@@ -1,16 +1,15 @@
-# licence https://github.com/vfxwiki/CameraShakeVetr
-# v0.6b / last editor: rafal kaniewski
 set cut_paste_input [stack 0]
-version 7.0 v6
+version 9.0 v1
 push $cut_paste_input
 Group {
  name CameraShkVctr
  tile_color 0x8ac160ff
  label "\n\n"
  selected true
- xpos 10465
- ypos 5533
+ xpos -235
+ ypos 51
  addUserKnob {20 Controls}
+ addUserKnob {52 pyLoad l "" +STARTLINE T "nuke.thisGroup()\['pyClass'].execute()" +STARTLINE}
  addUserKnob {22 pyClass l INVISIBLE -STARTLINE +INVISIBLE T "class cameraShakeVectors:\n\n\n    def __init__(self):\n\timport nuke\n\timport ast\n\tself.knobKeys = \['global_amt','center','amplitude','scale_amount','rot_amount','frequency','frequencyScale','frequencyRotation','global_amtHF','frequencyHF']\n\tself.thisG=nuke.thisGroup()\n\tpresetsStr=self.thisG\['presetsStr'].getValue()\n\tif not presetsStr is \"\":\n\t\tself.presetsDict=ast.literal_eval(presetsStr)\n\telse:\n\t\tself.presetsDict=\{\}\n\n    def savePreset(self):\n        newDict=\{\}\n        presetName=nuke.getInput('name of new preset')\n        if presetName: #2do validate is unique\n           presetName=presetName\n           for knob in self.knobKeys:\n                newDict\[knob]=(self.thisG\[knob].getValue())\n           self.presetsDict\[presetName]=newDict\n           self.thisG\['presetsStr'].setValue(str(self.presetsDict))\n\n    def updatePresetsList(self):\n             self.thisG\['presets'].setValues(self.presetsDict.keys())\n\n    def load(self):\n        preset=self.thisG\['presets'].value()\n        presetKnobs=self.presetsDict\[preset]        \n        for knob in presetKnobs:\n            \tself.thisG\[knob].setValue(presetKnobs\[knob])\n\n    def clearAll(self):\n\tif nuke.ask('Do you want to delete all the presets'):\n\t\tself.thisG\['presetsStr'].setValue('')\n\t\tself.thisG\['presets'].setValues(\[])\n\n    def delete(self):\n\tpreset=self.thisG\['presets'].value()\n\tif nuke.ask('Do you want to delete the '+preset+' preset'):\n\t\tdel self.presetsDict\[preset]\n\t\tnuke.tprint(self.presetsDict)\n\t\tself.thisG\['presetsStr'].setValue(str(self.presetsDict))"}
  addUserKnob {41 enableShake l "Enable Shake (vector mode: motion blur is control independent)" T control.enableShake}
  addUserKnob {41 enableMotionBlur l "Enable Motion Blur" T control.enableMotionBlur}
@@ -24,7 +23,6 @@ Group {
  addUserKnob {12 xformSizeOriginal_center l "XY Center" t "center of the pre-shake transform"}
  addUserKnob {20 endGroup n -1}
  addUserKnob {20 presets_G l Presets n 1}
- addUserKnob {52 pyLoad l INVISIBLE +INVISIBLE T "nuke.thisGroup()\['pyClass'].execute()" +STARTLINE}
  addUserKnob {4 presets M {}}
  addUserKnob {22 loadShake l " load " -STARTLINE T cameraShakeVectors().load()}
  addUserKnob {22 saveShake l " save " -STARTLINE T "cameraShakeVectors().savePreset()\ncameraShakeVectors().updatePresetsList()"}
@@ -111,7 +109,7 @@ Group {
   xpos 370
   ypos -194
  }
-set Nefe3d00 [stack 0]
+set N427b0490 [stack 0]
 add_layer {motionShk motionShk.red motionShk.green motionShk.blue motionShk.alpha}
  AddChannels {
   channels motionShk
@@ -143,7 +141,7 @@ add_layer {motionShk motionShk.red motionShk.green motionShk.blue motionShk.alph
   xpos 402
   ypos -19
  }
-set Nec6a570 [stack 0]
+set N427d3cd0 [stack 0]
  Transform {
   translate {{xformSizeOriginal_translate.x} {xformSizeOriginal_translate.y}}
   scale {{xformSizeOriginal_scale.w}}
@@ -155,7 +153,7 @@ set Nec6a570 [stack 0]
   xpos 412
   ypos 30
  }
-set Nf863590 [stack 0]
+set N427d7c40 [stack 0]
  Transform {
   translate {{control.translate i} {control.translate i}}
   center {{control.center i} {control.center i}}
@@ -166,13 +164,13 @@ set Nf863590 [stack 0]
   xpos 379
   ypos 250
  }
-set Nedef360 [stack 0]
+set N427e3850 [stack 0]
  Dot {
   name Dot23
   xpos 223
   ypos 193
  }
-push $Nedef360
+push $N427e3850
  MotionBlur2D {
   inputs 2
   uv motionShk
@@ -180,7 +178,7 @@ push $Nedef360
   xpos 341
   ypos 316
  }
-set Nfd508c0 [stack 0]
+set N427f3470 [stack 0]
  Transform {
   translate {{-control.translate} {-control.translate}}
   center {{control.center} {control.center}}
@@ -191,7 +189,7 @@ set Nfd508c0 [stack 0]
   xpos 151
   ypos 310
  }
-push $Nec6a570
+push $N427d3cd0
  Dot {
   name Dot11
   xpos 70
@@ -215,49 +213,49 @@ push $Nec6a570
   xpos 70
   ypos 362
  }
-set Neb96ac0 [stack 0]
+set N4291c280 [stack 0]
  Dot {
   name Dot9
   xpos 70
   ypos 426
  }
-set Nf0990b0 [stack 0]
+set N429204a0 [stack 0]
  Dot {
   name Dot8
   xpos 70
   ypos 454
  }
-set Nfdbecd0 [stack 0]
+set N42924860 [stack 0]
  Dot {
   name Dot7
   xpos 70
   ypos 482
  }
-set Nfd7bee0 [stack 0]
+set N42928aa0 [stack 0]
  Dot {
   name Dot6
   xpos 70
   ypos 562
  }
-set Nfe50bf0 [stack 0]
+set N4292cd60 [stack 0]
  Dot {
   name Dot5
   xpos 70
   ypos 590
  }
-set Nfcd4de0 [stack 0]
+set N42931020 [stack 0]
  Dot {
   name Dot4
   xpos 70
   ypos 618
  }
-set Nec04060 [stack 0]
+set N429352e0 [stack 0]
  Dot {
   name Dot3
   xpos 70
   ypos 700
  }
-set Nef1ca90 [stack 0]
+set N42939450 [stack 0]
  Dot {
   name Dot10
   xpos 70
@@ -271,7 +269,7 @@ set Nef1ca90 [stack 0]
   xpos 142
   ypos 725
  }
-push $Nef1ca90
+push $N42939450
  Transform {
   translate {{-width+Transform1.translate.x i} {height+Transform1.translate.y i}}
   scale {-1 -1}
@@ -280,7 +278,7 @@ push $Nef1ca90
   xpos 142
   ypos 697
  }
-push $Nec04060
+push $N429352e0
  Transform {
   translate {{width+Transform1.translate.x i} {height+Transform1.translate.y i}}
   scale {-1 -1}
@@ -289,7 +287,7 @@ push $Nec04060
   xpos 142
   ypos 615
  }
-push $Nfcd4de0
+push $N42931020
  Transform {
   translate {{Transform1.translate.x i} {height+Transform1.translate.y i}}
   scale {1 -1}
@@ -298,7 +296,7 @@ push $Nfcd4de0
   xpos 142
   ypos 587
  }
-push $Nfe50bf0
+push $N4292cd60
  Transform {
   translate {{width+Transform1.translate.x i} {Transform1.translate.y i}}
   scale {-1 1}
@@ -307,7 +305,7 @@ push $Nfe50bf0
   xpos 142
   ypos 559
  }
-push $Nfd7bee0
+push $N42928aa0
  Transform {
   translate {{-width+Transform1.translate.x i} {-height+Transform1.translate.y i}}
   scale {-1 -1}
@@ -316,7 +314,7 @@ push $Nfd7bee0
   xpos 142
   ypos 479
  }
-push $Nfdbecd0
+push $N42924860
  Transform {
   translate {{Transform1.translate.x i} {-height+Transform1.translate.y i}}
   scale {1 -1}
@@ -325,7 +323,7 @@ push $Nfdbecd0
   xpos 142
   ypos 451
  }
-push $Nf0990b0
+push $N429204a0
  Transform {
   translate {{-width+Transform1.translate.x i} {Transform1.translate.y i}}
   scale {-1 1}
@@ -334,7 +332,7 @@ push $Nf0990b0
   xpos 142
   ypos 423
  }
-push $Neb96ac0
+push $N4291c280
  Transform {
   translate {{xformShake.translate.x} {xformShake.translate.y}}
   center {{width/2} {height/2}}
@@ -404,8 +402,8 @@ push $Neb96ac0
   xpos 252
   ypos 749
  }
-push $Nfd508c0
-push $Nedef360
+push $N427f3470
+push $N427e3850
  Switch {
   inputs 2
   which {{motiontileEnable}}
@@ -423,8 +421,8 @@ push $Nedef360
   ypos 731
   disable {{!motiontileEnable x1042 0}}
  }
-set Nf86d500 [stack 0]
-push $Nf863590
+set N3fd6baa0 [stack 0]
+push $N427d7c40
  Dot {
   name Dot1
   xpos 883
@@ -435,15 +433,15 @@ push $Nf863590
   xpos 885
   ypos 708
  }
-set Nf87e910 [stack 0]
+set N40255db0 [stack 0]
  Dot {
   name Dot13
   xpos 1202
   ypos 1385
  }
-set Nf882b10 [stack 0]
-push $Nf87e910
-push $Nf86d500
+set N3fd47d40 [stack 0]
+push $N40255db0
+push $N3fd6baa0
  Transform {
   rotate {{control.rotation i}}
   center {{control.center i} {control.center i}}
@@ -454,7 +452,7 @@ push $Nf86d500
   xpos 379
   ypos 820
  }
-set Nf950100 [stack 0]
+set N40269f40 [stack 0]
  ShuffleCopy {
   inputs 2
   in motionShk
@@ -473,8 +471,8 @@ set Nf950100 [stack 0]
   xpos 924
   ypos 1426
  }
-push $Nf86d500
-push $Nf950100
+push $N3fd6baa0
+push $N40269f40
  Transform {
   scale {{control.scale i}}
   center {{control.center i} {control.center i}}
@@ -485,13 +483,13 @@ push $Nf950100
   xpos 379
   ypos 916
  }
-set Nfa39db0 [stack 0]
+set N4028bb20 [stack 0]
  Dot {
   name Dot17
   xpos 383
   ypos 1035
  }
-push $Nfa39db0
+push $N4028bb20
  Dot {
   name Dot16
   xpos 426
@@ -504,7 +502,7 @@ push $Nfa39db0
   xpos 373
   ypos 1072
  }
-set Nfa4e1a0 [stack 0]
+set N4029f820 [stack 0]
  Merge2 {
   inputs 2
   operation plus
@@ -569,7 +567,7 @@ set Nfa4e1a0 [stack 0]
   ypos 1678
   disable {{!control.enableMotionBlur x1040 1}}
  }
-push $Nfa39db0
+push $N4028bb20
  Transform {
   center {{width/2} {height/2}}
   filter Rifman
@@ -580,7 +578,7 @@ push $Nfa39db0
   ypos 1275
   disable {{!control.enableMotionBlur x1044 0}}
  }
-push $Nf882b10
+push $N3fd47d40
  Dot {
   name Dot22
   xpos 665
@@ -617,7 +615,7 @@ push $Nf882b10
   xpos 211
   ypos 916
  }
-push $Nefe3d00
+push $N427b0490
  Dot {
   name Dot25
   xpos -328
@@ -691,7 +689,7 @@ push 0
 push 0
 push 0
 push 0
-push $Nfa4e1a0
+push $N4029f820
  Viewer {
   inputs 8
   channels motion
